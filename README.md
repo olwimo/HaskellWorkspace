@@ -1,0 +1,2 @@
+# HaskellWorkspace
+Haskell Workspace
