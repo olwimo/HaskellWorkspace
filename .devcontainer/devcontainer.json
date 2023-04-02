@@ -1,7 +1,28 @@
 {
-  "name": "Haskell (Community)",
+  "name": "Haskell (olwimo)",
   "build": {
     "dockerfile": "Dockerfile"
+  },
+  "shutdownAction": "stopContainer",
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+    "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind,consistency=cached"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": true,
+      "dockerDashComposeVersion": "v2"
+    }
   },
   // Configure tool-specific properties.
   "customizations": {
@@ -9,7 +30,8 @@
     "vscode": {
       // Set *default* container specific settings.json values on container create.
       "settings": {
-        "haskell.manageHLS": "GHCup"
+        "haskell.manageHLS": "GHCup",
+        "files.eol": "\n"
       },
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
@@ -18,5 +40,6 @@
     }
   },
   // Comment out to connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "containerUser": "vscode"
 }
