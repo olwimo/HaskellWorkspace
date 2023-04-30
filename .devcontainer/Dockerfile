@@ -26,6 +26,8 @@ RUN apt-get update \
         libnuma-dev \
         libtinfo-dev \
         zlib1g-dev \
+        pandoc \
+        wkhtmltopdf \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install latest GHCup in the non-root user home
